@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
 
     public float moveSpeed = 1f;
+
+    public int bulletNum = 30;
     
     public float collisionOffset = 0.05f;
     public ContactFilter2D movementFilter;
@@ -100,7 +102,21 @@ public class PlayerController : MonoBehaviour
         movementInput = movementValue.Get<Vector2>();
     }
 
+    public float GetCurrentHP()
+    {
+        return currentHp;
+    }
+
+    public int GetBulletNum()
+    {
+        return bulletNum;
+    }
+
     void OnFire() {
+        if (bulletNum == 0) {
+            return;
+        }
+        bulletNum -= 1;
         animator.SetTrigger("bulletAttack");
 
         var screenCenter = new Vector2(cam.pixelWidth / 2, cam.pixelHeight / 2);

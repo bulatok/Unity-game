@@ -22,6 +22,14 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, rot + 90);
     }
 
-    void Update(){
+    void Update(){}
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        PlayerController player = other.GetComponent<PlayerController>();
+        if (player != null) {} 
+        else {
+            Destroy(this.gameObject);
+        }
     }
 }

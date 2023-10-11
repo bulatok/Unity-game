@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Todo: stamina, рывок, run
 public class PlayerController : MonoBehaviour
 {
-
     public float moveSpeed = 1f;
+    public float attackCoolDown = 0.5f;
 
     public int bulletNum = 30;
     
@@ -14,7 +15,9 @@ public class PlayerController : MonoBehaviour
     public ContactFilter2D movementFilter;
 
     public float maxHp = 100f;
+    public float maxStamina = 3f;
 
+    private float currentStamina;
     private float currentHp;
 
     private Vector3 mousePos;
@@ -42,10 +45,10 @@ public class PlayerController : MonoBehaviour
     // private GameObject projectile;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         cam = Camera.main;
         currentHp = maxHp;
+        currentStamina = maxStamina / 2;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -53,6 +56,11 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        if (currentHp <= 0) {
+            Invoke(nameof(Die), 2);
+            return;
+        } 
+        RegenStamina();
         if (movementInput != Vector2.zero) {
             bool success = TryMove(movementInput);
             
@@ -78,16 +86,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private bool TryMove(Vector2 direction) {
+    private bool TryMove(Vector2 direction)
+    {
+        float distance = moveSpeed * Time.fixedDeltaTime;
+        if (Input.GetKey(KeyCode.LeftShift) && currentStamina > 0) // dash
+            distance *= 2;
         if(direction != Vector2.zero) {
             int count = rb.Cast(
                 direction, 
                 movementFilter, 
                 castCollisions, // List of collisions to store the found collisions into after the Cast is finished
-                moveSpeed * Time.fixedDeltaTime + collisionOffset); // The amount to cast equal to the movement plus an offset
-
+                distance + collisionOffset); // The amount to cast equal to the movement plus an offset
             if(count == 0){
-                rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+                rb.MovePosition(rb.position + direction * distance);
                 return true;
             } else {
                 return false;
@@ -98,29 +109,60 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void RegenStamina() {
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            currentStamina -= 1 * Time.fixedDeltaTime;
+        } else {
+            currentStamina += 0.5f * Time.fixedDeltaTime;
+        }
+    }
+    
     void OnMove(InputValue movementValue) {
         movementInput = movementValue.Get<Vector2>();
     }
 
-    public float GetCurrentHP()
-    {
+    public float GetCurrentHP() {
         return currentHp;
     }
 
-    public int GetBulletNum()
-    {
+    public int GetBulletNum() {
         return bulletNum;
     }
 
+    private bool _canFire = true;
     void OnFire() {
-        if (bulletNum == 0) {
+        if (bulletNum == 0 || currentHp <= 0 || !_canFire) {
             return;
         }
+
+        _canFire = false;
         bulletNum -= 1;
-        animator.SetTrigger("bulletAttack");
 
-        var screenCenter = new Vector2(cam.pixelWidth / 2, cam.pixelHeight / 2);
-
+        // var screenCenter = new Vector2(cam.pixelWidth / 2, cam.pixelHeight / 2);
+        Invoke(nameof(UnsetFireFlag), attackCoolDown);
         Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+    }
+
+    private void UnsetFireFlag() {
+        _canFire = true;
+    }
+
+    public void Heal(float delta) {
+        currentHp = Mathf.Min(currentHp + delta, maxHp);
+        if (delta < 0)
+            animator.SetTrigger("bulletAttack");
+    }
+    
+    public void ReloadAmmo(int delta) {
+        bulletNum += delta;
+    }
+    
+    private void Die() {
+        Destroy(gameObject);
+    }
+
+    public float GetCurrentStamina()
+    {
+        return currentStamina;
     }
 }

@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Vector3 mousePos; 
-    
+    private Vector3 mousePos;
+
     private Camera mainCam;
     private Rigidbody2D rb;
     public float force;
     private Camera cam;
 
-    void Start(){
+    void Start() {
         cam = Camera.main;
         rb = GetComponent<Rigidbody2D>();
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
@@ -22,14 +20,13 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, rot + 90);
     }
 
-    void Update(){}
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        PlayerController player = other.GetComponent<PlayerController>();
-        if (player != null) {} 
-        else {
-            Destroy(this.gameObject);
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Unpassable")) {
+            Destroy(gameObject);
+        }
+        if (other.CompareTag("Enemy")) {
+            other.GetComponent<IDamagable>().Damage(20);
+            Destroy(gameObject);
         }
     }
 }

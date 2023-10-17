@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// Todo: stamina, рывок, run
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 1f;
@@ -23,7 +23,14 @@ public class PlayerController : MonoBehaviour
     private Vector3 mousePos;
     public GameObject bulletPrefab;
 
-    // public Transform bulletTransform;
+    public class Inventory
+    {
+        public List<Weapon> weapons;
+        public int activeSlot;
+    }
+
+    public Inventory inventory;
+    
     private Camera cam;
 
 
@@ -39,12 +46,7 @@ public class PlayerController : MonoBehaviour
     // 2 - right
     // 3 - down
     // 4 - top
-
-
-    // [SerializeField] GameObject projectilePrefab;
-    // private GameObject projectile;
-
-    // Start is called before the first frame update
+    
     void Start() {
         cam = Camera.main;
         currentHp = maxHp;
@@ -53,6 +55,10 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         curDirection = 2;
+        inventory = new Inventory();
+        inventory.weapons = new List<Weapon>();
+        inventory.weapons.Add(gameObject.AddComponent<Rifle>());
+        inventory.activeSlot = 0;
     }
 
     private void FixedUpdate() {
@@ -138,9 +144,9 @@ public class PlayerController : MonoBehaviour
         _canFire = false;
         bulletNum -= 1;
 
-        // var screenCenter = new Vector2(cam.pixelWidth / 2, cam.pixelHeight / 2);
         Invoke(nameof(UnsetFireFlag), attackCoolDown);
-        Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        // Weapon
+        inventory.weapons[inventory.activeSlot].Shoot(bulletPrefab, transform.position);
     }
 
     private void UnsetFireFlag() {

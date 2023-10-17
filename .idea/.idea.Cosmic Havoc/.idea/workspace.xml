@@ -5,18 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aaf9dfb6-39d8-4796-8489-5664ea71aa69" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Cosmic Havoc/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Cosmic Havoc/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Icons/GUI/Main_Menu/BG.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Icons/GUI/Main_Menu/BG.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Art/tilesets/MyPalate1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/tilesets/MyPalate1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Characters/Player/AC_Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Characters/Player/AC_Player.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Characters/Player/Animations/player_idle.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Characters/Player/Animations/player_idle.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Characters/CrowBoss/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Characters/CrowBoss/Enemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Characters/CrowBoss/EnemyInfoManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Characters/CrowBoss/EnemyInfoManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Characters/Full body animated characters/Enemies/Enemy 1/Enemy1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Characters/Full body animated characters/Enemies/Enemy 1/Enemy1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Characters/Full body animated characters/Enemies/Enemy 1/EnemyBullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Characters/Full body animated characters/Enemies/Enemy 1/EnemyBullet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Characters/Full body animated characters/Enemies/Enemy 1/RegularEnemy1.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Characters/Full body animated characters/Enemies/Enemy 1/RegularEnemy1.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Characters/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Characters/Player/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Characters/Player/weapon/bulet_default/Bullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Characters/Player/weapon/bulet_default/Bullet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scence1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scence1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Characters/Player/Weapon.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Characters/Player/Weapon.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scence1.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scence1.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI/Canvas/UIController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/Canvas/UIController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +125,9 @@
       <workItem from="1696782844384" duration="8081000" />
       <workItem from="1696951397778" duration="13679000" />
       <workItem from="1696974682830" duration="11860000" />
-      <workItem from="1697029818528" duration="6296000" />
+      <workItem from="1697029818528" duration="8268000" />
+      <workItem from="1697542715620" duration="3445000" />
+      <workItem from="1697566700254" duration="6174000" />
     </task>
     <servers />
   </component>

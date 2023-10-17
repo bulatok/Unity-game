@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, IDamagable
 {
@@ -20,10 +21,10 @@ public class Enemy : MonoBehaviour, IDamagable
     public float dashDistance = 5f;
     public float dashSpeed = 10f;
     private bool _canDash = true;
+    [SerializeField] public Slider hpBar;
     
     private float _maxHp = 200;
     private float _hp;
-    [SerializeField] EnemyInfoManager _enemyInfoManager;
 
     private State _state;
     public float speed = 3;
@@ -105,7 +106,7 @@ public class Enemy : MonoBehaviour, IDamagable
         _state = State.Damaged;
         animator.SetTrigger("IsDamaged");
         _hp -= delta;
-        _enemyInfoManager.Change(_hp / _maxHp);
+        hpBar.value = _hp / _maxHp;
         if (_hp <= 0)
         {
             rb.velocity = new Vector2(0, 0);

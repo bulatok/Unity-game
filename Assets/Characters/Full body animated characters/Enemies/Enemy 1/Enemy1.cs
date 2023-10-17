@@ -59,7 +59,7 @@ public class Enemy1 : MonoBehaviour, IDamagable
         if (_state != State.Damaged && _state != State.Dead) {
             Attack(player.transform.position - transform.position);
         }
-        Debug.Log(_hp + _state.ToString());
+        // Debug.Log(_hp + _state.ToString());
     }
 
     void UnsetAttackFlag() {

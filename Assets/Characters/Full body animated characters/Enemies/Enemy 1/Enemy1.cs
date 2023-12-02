@@ -19,8 +19,11 @@ public class Enemy1 : MonoBehaviour, IDamagable
 
     public float attackCD = 2;
     private bool _canAttack = true;
+    
+    private AudioSource attackSound;
 
     void Start() {
+        attackSound = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         _state = State.Idle;
@@ -69,6 +72,7 @@ public class Enemy1 : MonoBehaviour, IDamagable
     public void Attack(Vector2 dir)
     {
         if (_state != State.Dead && _canAttack) {
+            attackSound.Play(0);
             _canAttack = false;
             animator.ResetTrigger("IsMoving");
             GameObject bullet = Instantiate(bulletPrefab);

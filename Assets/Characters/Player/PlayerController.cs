@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 1f;
     public float attackCoolDown = 0.5f;
 
-    public int bulletNum = 30;
-    
     public float collisionOffset = 0.05f;
     public ContactFilter2D movementFilter;
 
@@ -21,25 +21,19 @@ public class PlayerController : MonoBehaviour
     private float currentHp;
 
     private Vector3 mousePos;
-    public GameObject bulletPrefab;
 
-    public class Inventory
-    {
-        public List<Weapon> weapons;
-        public int activeSlot;
-    }
-
-    public Inventory inventory;
+    public InventoryManager inventory;
     
     private Camera cam;
-
+    
+    [SerializeField] RectTransform fader;
+    
 
     Vector2 movementInput;
     Rigidbody2D rb;
     List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     Animator animator;
     SpriteRenderer spriteRenderer;
-
 
     private int curDirection;
     // 1 - left
@@ -55,17 +49,14 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         curDirection = 2;
-        inventory = new Inventory();
-        inventory.weapons = new List<Weapon>();
-        inventory.weapons.Add(gameObject.AddComponent<Rifle>());
-        inventory.activeSlot = 0;
     }
 
     private void FixedUpdate() {
         if (currentHp <= 0) {
             Invoke(nameof(Die), 2);
             return;
-        } 
+        }
+        
         RegenStamina();
         if (movementInput != Vector2.zero) {
             bool success = TryMove(movementInput);
@@ -131,22 +122,17 @@ public class PlayerController : MonoBehaviour
         return currentHp;
     }
 
-    public int GetBulletNum() {
-        return bulletNum;
-    }
-
     private bool _canFire = true;
     void OnFire() {
-        if (bulletNum == 0 || currentHp <= 0 || !_canFire) {
+        if (currentHp <= 0 || !_canFire) {
             return;
         }
 
         _canFire = false;
-        bulletNum -= 1;
 
         Invoke(nameof(UnsetFireFlag), attackCoolDown);
         // Weapon
-        inventory.weapons[inventory.activeSlot].Shoot(bulletPrefab, transform.position);
+        inventory.Shoot(transform.position);
     }
 
     private void UnsetFireFlag() {
@@ -159,12 +145,17 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("bulletAttack");
     }
     
-    public void ReloadAmmo(int delta) {
-        bulletNum += delta;
-    }
-    
     private void Die() {
         Destroy(gameObject);
+
+        fader.gameObject.SetActive(true);
+        LeanTween.scale(fader, Vector3.zero, 0f);
+        LeanTween.scale(fader, Vector3.zero, 0.5f).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() =>
+        {
+            SceneManager.LoadScene("Level1");
+        });
+        
+        // SceneManager.LoadScene("Level1");
     }
 
     public float GetCurrentStamina()

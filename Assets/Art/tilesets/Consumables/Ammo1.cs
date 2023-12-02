@@ -6,8 +6,8 @@ public class Ammo1 : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerController player = other.GetComponent<PlayerController>();
-            player.ReloadAmmo(5);
+            InventoryManager im = other.GetComponent<InventoryManager>();
+            im.ReloadAmmo(5);
             Destroy(gameObject);
         }
     }

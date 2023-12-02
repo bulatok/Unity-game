@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour, IDamagable
 {
@@ -28,6 +29,8 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private State _state;
     public float speed = 3;
+    
+    public AudioSource attackSound;
 
     void Start()
     {
@@ -91,6 +94,7 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         if (_state != State.Dead && _state != State.Attacking)
         {
+            attackSound.Play(0);
             animator.ResetTrigger("IsMoving");
             _state = State.Attacking;
             animator.SetTrigger("IsAttacking");
@@ -137,5 +141,6 @@ public class Enemy : MonoBehaviour, IDamagable
     private void Die()
     {
         Destroy(gameObject);
+        SceneManager.LoadScene("Level2");
     }
 }

@@ -41,7 +41,6 @@ public class Rifle : Weapon
 
     public override void Shoot(Vector3 pos)
     {
-        Debug.Log("Shoot" + ": Rifle");
         Debug.Log(BulletPrefab);
         
         ShotSound.Play(0);
@@ -82,4 +81,41 @@ public class ShotGun : Weapon
         UnityEngine.Object.Instantiate(BulletPrefab, downerPos, Quaternion.identity);
         ShotSound.Play(0);
     }
+}
+
+
+public class Bluster : Weapon
+{
+    public GameObject BulletPrefab { get; set; }
+    public AudioSource ShotSound { get; set; }
+
+    public Bluster(GameObject pref, AudioSource sound)
+    {
+        BulletPrefab = pref;
+        ShotSound = sound;
+    }
+
+    public override int BuletNeeded()
+    {
+        return 2;
+    }
+    
+    public override string Name()
+    {
+        return "bluster";
+    }
+
+    public override void Shoot(Vector3 pos)
+    {
+        ShotSound.Play(0);
+
+        // Instantiate the first bullet with a small offset above the initial position
+        Vector3 firstBulletPosition = pos + new Vector3(0f, 0.1f, 0f);
+        UnityEngine.Object.Instantiate(BulletPrefab, firstBulletPosition, Quaternion.identity);
+
+        // Instantiate the second bullet with a small offset below the initial position
+        Vector3 secondBulletPosition = pos - new Vector3(0f, 0.1f, 0f);
+        UnityEngine.Object.Instantiate(BulletPrefab, secondBulletPosition, Quaternion.identity);
+    }
+
 }

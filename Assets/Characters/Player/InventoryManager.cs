@@ -10,15 +10,15 @@ public class InventoryManager : MonoBehaviour
     
     public int bulletNum = 30;
     
-    public GameObject defaultBulletPrefab;
+    public GameObject gunBulletPrefab;
     public GameObject shotgunBulletPrefab;
-
-    // For for shooting in a clamp
-    public GameObject blasterBulletPrefab;
+    public GameObject blusterBulletPrefab;
     
     public AudioSource gunSound;
     
     public AudioSource shotgunSound;
+
+    public AudioSource blusterSound;
     
     private List<Weapon> weapons;
     
@@ -26,8 +26,9 @@ public class InventoryManager : MonoBehaviour
         weapons = new List<Weapon>();
         
         // Default weapons
-        weapons.Add(new Rifle(defaultBulletPrefab, gunSound));
         weapons.Add(new ShotGun(shotgunBulletPrefab, shotgunSound));
+		weapons.Add(new Rifle(gunBulletPrefab, gunSound));
+		weapons.Add(new Bluster(blusterBulletPrefab, blusterSound));
         activeSlot = 0;
     }
 
@@ -52,27 +53,57 @@ public class InventoryManager : MonoBehaviour
     
     void Update()
     {
-        int totalWeapons = weapons.Count;
-        if(Input.GetAxis("Mouse ScrollWheel") != 0){
-            if(Input.GetAxis("Mouse ScrollWheel") > 0){
-                activeSlot = (activeSlot + 1) % totalWeapons;
-                
-            }
-            if(Input.GetAxis("Mouse ScrollWheel") < 0){
-                activeSlot -= 1;
-                if (activeSlot <= 0) {
-                    activeSlot *= -1;
-                }
-            }
-        }
-        
-        // if (Input.GetKeyDown(KeyCode.Alpha1)) {
-        //     inventory.activeSlot = Math.Min(inventory.weapons.Count, 1) - 1;
-        // } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
-        //     inventory.activeSlot = Math.Min(inventory.weapons.Count, 2) - 1;
-        // } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
-        //     inventory.activeSlot = Math.Min(inventory.weapons.Count, 3) - 1;
+        // int totalWeapons = weapons.Count;
+        // if(Input.GetAxis("Mouse ScrollWheel") != 0){
+        //     if(Input.GetAxis("Mouse ScrollWheel") > 0){
+        //         activeSlot = (activeSlot + 1) % totalWeapons;
+        //         
+        //     }
+        //     if(Input.GetAxis("Mouse ScrollWheel") < 0){
+        //         activeSlot -= 1;
+        //         if (activeSlot <= 0) {
+        //             activeSlot *= -1;
+        //         }
+        //     }
         // }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+			activeSlot = 0;
+			switchOffGuns();
+			switchOnGun(activeSlot);
+        } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+			activeSlot = 1;      
+			switchOffGuns();
+			switchOnGun(activeSlot);      
+        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+			activeSlot = 2;      
+			switchOffGuns();
+			switchOnGun(activeSlot);      
+        }
+    }
+
+	private int getGunNumber() {
+		return weapons.Count;
+	}
+
+	private void switchOnGun(int idx) {
+		int index = 0;
+        foreach (Transform child in transform)
+        {
+			if (index == idx) {
+				child.gameObject.SetActive(true);
+			}
+            index++;
+        }
+	}
+
+
+    private void switchOffGuns()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
     }
 
     public void Shoot(Vector3 pos)

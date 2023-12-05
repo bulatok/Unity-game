@@ -21,6 +21,11 @@ public class InventoryManager : MonoBehaviour
     public AudioSource blusterSound;
     
     private List<Weapon> weapons;
+	
+	// Guns
+    [SerializeField] private SpriteRenderer shotgunSprite;
+	[SerializeField] private SpriteRenderer gunSprite;
+    [SerializeField] private SpriteRenderer blusterSprite;
     
     private void Start() {
         weapons = new List<Weapon>();
@@ -50,36 +55,29 @@ public class InventoryManager : MonoBehaviour
         Weapon weapon = weapons[activeSlot];
         return weapon.Name();
     }
+
+	public void flipWeapon(bool val) {
+		if (activeSlot == 0) {
+			shotgunSprite.flipX = val;
+		} else if (activeSlot == 1) {
+			gunSprite.flipX = val;		
+		} else if (activeSlot == 2) {
+			blusterSprite.flipX = val;
+		}
+		
+	}
     
     void Update()
     {
-        // int totalWeapons = weapons.Count;
-        // if(Input.GetAxis("Mouse ScrollWheel") != 0){
-        //     if(Input.GetAxis("Mouse ScrollWheel") > 0){
-        //         activeSlot = (activeSlot + 1) % totalWeapons;
-        //         
-        //     }
-        //     if(Input.GetAxis("Mouse ScrollWheel") < 0){
-        //         activeSlot -= 1;
-        //         if (activeSlot <= 0) {
-        //             activeSlot *= -1;
-        //         }
-        //     }
-        // }
-
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
 			activeSlot = 0;
-			switchOffGuns();
-			switchOnGun(activeSlot);
         } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
 			activeSlot = 1;      
-			switchOffGuns();
-			switchOnGun(activeSlot);      
         } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
 			activeSlot = 2;      
-			switchOffGuns();
-			switchOnGun(activeSlot);      
         }
+		switchOffGuns();
+		switchOnGun(activeSlot);  
     }
 
 	private int getGunNumber() {

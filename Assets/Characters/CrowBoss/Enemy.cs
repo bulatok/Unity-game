@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour, IDamagable
     public float dashDistance = 5f;
     public float dashSpeed = 10f;
     private bool _canDash = true;
+	public int level = 1;
     [SerializeField] public Slider hpBar;
     
     private float _maxHp = 200;
@@ -121,7 +122,6 @@ public class Enemy : MonoBehaviour, IDamagable
             return;
         }
 
-        Debug.Log(_state.ToString() + _hp);
         Invoke(nameof(UnsetDamageFlag), 1);
     }
 
@@ -141,6 +141,10 @@ public class Enemy : MonoBehaviour, IDamagable
     private void Die()
     {
         Destroy(gameObject);
-        SceneManager.LoadScene("Level2");
+		if (level == 1) {
+			SceneManager.LoadScene("Level2");
+		} else {
+			
+		}
     }
 }

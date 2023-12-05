@@ -95,10 +95,10 @@ public class Enemy1 : MonoBehaviour, IDamagable
             animator.SetTrigger("Die");
             animator.ResetTrigger("Hit");
             _state = State.Dead;
-            Invoke(nameof(Die), 2);
+            Invoke(nameof(Die), 0.6f);
             return;
         }
-        Invoke(nameof(UnsetDamageFlag), 1);
+        Invoke(nameof(UnsetDamageFlag), 0.3f);
     }
 
     private void UnsetDamageFlag() {

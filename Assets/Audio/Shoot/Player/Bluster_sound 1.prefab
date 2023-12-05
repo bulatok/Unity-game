@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3708199914996078248}
   - component: {fileID: 8170257275445798496}
   m_Layer: 0
-  m_Name: Bluster_sound 1
+  m_Name: bluster_sound 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

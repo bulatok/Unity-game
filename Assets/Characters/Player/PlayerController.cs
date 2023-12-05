@@ -77,9 +77,11 @@ public class PlayerController : MonoBehaviour
         if(movementInput.x < 0) {
             curDirection = 1;
             spriteRenderer.flipX = true;
+			inventory.flipWeapon(true);
         } else if (movementInput.x > 0) {
             curDirection = 2;
             spriteRenderer.flipX = false;
+			inventory.flipWeapon(false);
         }
     }
 

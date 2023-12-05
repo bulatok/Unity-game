@@ -115,4 +115,23 @@ public class InventoryManager : MonoBehaviour
         weapon.Shoot(pos);
         bulletNum -= weapon.BuletNeeded();
     }
+
+	public float getPlayerSpeedCoef() {
+		// shotgun	
+		if (activeSlot == 0) {
+			return 0.5f;
+		}
+
+		// gun
+		if (activeSlot == 1) {
+			return 1f;
+		}
+		
+		// bluster 
+		if (activeSlot == 2) {
+			return 0.6f;
+		}
+
+		return 1f;
+	}
 }

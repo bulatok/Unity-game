@@ -40,9 +40,7 @@ public class Rifle : Weapon
 
 
     public override void Shoot(Vector3 pos)
-    {
-        Debug.Log(BulletPrefab);
-        
+    {        
         ShotSound.Play(0);
         UnityEngine.Object.Instantiate(BulletPrefab, pos, Quaternion.identity);
     }

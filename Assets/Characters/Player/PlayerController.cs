@@ -35,6 +35,10 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     SpriteRenderer spriteRenderer;
 
+	
+	[SerializeField]
+    private GameObject enemyZoneObject;
+
     private int curDirection;
     // 1 - left
     // 2 - right
@@ -42,6 +46,7 @@ public class PlayerController : MonoBehaviour
     // 4 - top
     
     void Start() {
+		enemyZoneObject.SetActive(false);
         cam = Camera.main;
         currentHp = maxHp;
         currentStamina = maxStamina / 2;
@@ -87,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
     private bool TryMove(Vector2 direction)
     {
-        float distance = moveSpeed * Time.fixedDeltaTime;
+        float distance = moveSpeed * Time.fixedDeltaTime * inventory.getPlayerSpeedCoef();
         if (Input.GetKey(KeyCode.LeftShift) && currentStamina > 0) // dash
             distance *= 2;
         if(direction != Vector2.zero) {
@@ -158,6 +163,14 @@ public class PlayerController : MonoBehaviour
         });
         
         // SceneManager.LoadScene("Level1");
+    }
+	
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("EnemyZone"))
+        {
+			enemyZoneObject.SetActive(true);
+		}
     }
 
     public float GetCurrentStamina()

@@ -159,10 +159,8 @@ public class PlayerController : MonoBehaviour
         LeanTween.scale(fader, Vector3.zero, 0f);
         LeanTween.scale(fader, Vector3.zero, 0.5f).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() =>
         {
-            SceneManager.LoadScene("Level1");
+            SceneManager.LoadScene("Level2");
         });
-        
-        // SceneManager.LoadScene("Level1");
     }
 	
     private void OnTriggerEnter2D(Collider2D other)
